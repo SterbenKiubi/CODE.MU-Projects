@@ -10,64 +10,37 @@ function renderDice() {
 
     let points = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 
-    if (points >= 1 && points <= 3) {
-        for(let i = 0; i < points; i++) {
-            const div = document.createElement('div');
-            div.classList.add('point');
-
-            dice.appendChild(div);
-        }
-    }
-
-    if (points == 4) {
-        for(let i = 0; i < 2; i++) {
-            const pointsContainer = document.createElement('div');
-            for(let j = 0; j < 2; j++) {
-                const div = document.createElement('div');
-                div.classList.add('point');
-                
-                pointsContainer.appendChild(div);
-            }
-            dice.appendChild(pointsContainer);
-        }
-    } 
-
-    if (points == 6) {
-        for(let i = 0; i < 2; i++) {
-            const pointsContainer = document.createElement('div');
-            for(let j = 0; j < 3; j++) {
-                const div = document.createElement('div');
-                div.classList.add('point');
-
-                pointsContainer.appendChild(div);
-            }
-
-            dice.appendChild(pointsContainer);
-        }
-    }
-
-    if (points == 5) {
-        for(let i = 0; i < 3; i++) {
-            const pointsContainer = document.createElement('div');
-            dice.appendChild(pointsContainer);
-        }
-
-        const pointsContainers = dice.childNodes;
-        
-        for(let elem of pointsContainers) {
-            if(Array.from(pointsContainers).indexOf(elem) % 2 == 0) {
-                for(let i = 0; i < 2; i++) {
-                    const div = document.createElement('div');
-                    div.classList.add('point');
-
-                    elem.appendChild(div)
-                }
-            } else {
-                const div = document.createElement('div');
-                div.classList.add('point');
-
-                elem.appendChild(div)
-            }
-        } 
+    switch (points) {
+        case 1:
+        case 2:
+        case 3:
+            dice.appendChild(createPointsContainer(points));
+            break;
+        case 4:
+            dice.appendChild(createPointsContainer(2));
+            dice.appendChild(createPointsContainer(2));
+            break;
+        case 5:
+            dice.appendChild(createPointsContainer(2));
+            dice.appendChild(createPointsContainer(1));
+            dice.appendChild(createPointsContainer(2));
+            break;
+        case 6:
+            dice.appendChild(createPointsContainer(3));
+            dice.appendChild(createPointsContainer(3));
+            break;
     }
 };
+
+function createPointsContainer(pointsCount) {
+        const container = document.createElement('div');
+
+        for(let i = 0; i < pointsCount; i++) {
+            const pointDiv = document.createElement('div');
+            pointDiv.classList.add('point');
+
+            container.appendChild(pointDiv);
+        }
+
+        return container;
+}
