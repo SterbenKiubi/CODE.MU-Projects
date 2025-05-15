@@ -1,18 +1,17 @@
 const button = document.querySelector('#button');
 const dice = document.querySelector('#dice');
 
-let points;
-
 button.addEventListener('click', function() {
-    points = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-
-    renderDice(points);
+    renderDice();
 });
 
-function renderDice(numPoints) {
+function renderDice() {
     dice.innerHTML = '';
-    if(numPoints >= 1 && numPoints <= 3) {
-        for(let i = 0; i < numPoints; i++) {
+
+    let points = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+
+    if (points >= 1 && points <= 3) {
+        for(let i = 0; i < points; i++) {
             const div = document.createElement('div');
             div.classList.add('point');
 
@@ -20,7 +19,7 @@ function renderDice(numPoints) {
         }
     }
 
-    if(numPoints == 4) {
+    if (points == 4) {
         for(let i = 0; i < 2; i++) {
             const pointsContainer = document.createElement('div');
             for(let j = 0; j < 2; j++) {
@@ -33,7 +32,7 @@ function renderDice(numPoints) {
         }
     } 
 
-    if(numPoints == 6) {
+    if (points == 6) {
         for(let i = 0; i < 2; i++) {
             const pointsContainer = document.createElement('div');
             for(let j = 0; j < 3; j++) {
@@ -47,7 +46,7 @@ function renderDice(numPoints) {
         }
     }
 
-    if(numPoints == 5) {
+    if (points == 5) {
         for(let i = 0; i < 3; i++) {
             const pointsContainer = document.createElement('div');
             dice.appendChild(pointsContainer);
