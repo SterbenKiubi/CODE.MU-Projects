@@ -35,11 +35,22 @@ html {
     height: 200px;
 }
 
+.points-container {
+  display: none;
+}
+
+.points-container div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .point {
     width: 25px;
     height: 25px;
     border: 1px solid black;
     border-radius: 50%;
     background-color: black;
-    margin: 35px 15px;
+    margin: 25px 15px;
 }
