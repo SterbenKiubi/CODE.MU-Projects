@@ -8,7 +8,7 @@ button.addEventListener('click', function() {
 function renderDice() {
     dice.innerHTML = '';
 
-    let points = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+    let points = getRandomInt(1, 6);
 
     switch (points) {
         case 1:
@@ -43,4 +43,8 @@ function createPointsContainer(pointsCount) {
         }
 
         return container;
-}
+};
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
