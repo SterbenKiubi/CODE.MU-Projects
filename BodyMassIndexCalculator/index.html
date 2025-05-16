@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Body Mass Index Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        
+        <div class="calculator">
+            <div class="calc-header">Калькулятор индекса массы тела (ИМТ)</div>
+            <table class="table">
+                <tr>
+                    <td>Ваш рост, в см.</td>
+                    <td>
+                        <input id="height-input" class="calc-input" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ваш вес, в кг.</td>
+                    <td>
+                        <input id="weight-input" class="calc-input" type="text">
+                    </td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <input id="button" type="submit" value="Рассчитать">
+            </div>
+            <div id="info" class="info"></div>
+        </div>
+    </div>
     <script src="scrips.js"></script>
 </body>
 </html>
