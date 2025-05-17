@@ -9,7 +9,7 @@
 <body>
     <div class="container">
 
-        <div class="ask-date-container">
+        <div id="ask-date-container" class="ask-date-container">
             <h2>Кол-во дней до даты</h2>
             <div class="ask-date-container_enter-name">
                 <p>Введите название события:</p>
@@ -17,11 +17,12 @@
             </div>
             <div class="ask-date-container_enter-date">
                 <p>Введите дату:</p>
-                <input id="date-input" type="text">
+                <input id="date-input" type="text" placeholder="01.01.2000">
             </div>
             <input id="button" type="submit" value="Ввести">
         </div>
-        <div class="num-days-container">Кол-во дней до даты:</div>
+
+        <div id="num-days-container" class="num-days-container hide">Кол-во дней до даты:</div>
 
     </div>
     <script src="scrips.js"></script>
