@@ -4,13 +4,21 @@ const dateInput = document.querySelector('#date-input');
 const numDaysContainer = document.querySelector('#num-days-container');
 const button = document.querySelector('#button');
 
-let dateName;
-let dateValue;
-
 // localStorage.clear();
 
 const jsonDate = localStorage.getItem('date');
 const dateArr = jsonDate ? JSON.parse(jsonDate) : [];
+
+function isDateEntered() {
+    if (jsonDate) {
+        hideAskContainer();
+        showNumDaysContainer();
+    } else {
+        return;
+    }
+};
+
+isDateEntered();
 
 button.addEventListener('click', function() {
     const nameValue = dateNameInput.value;
@@ -30,4 +38,8 @@ button.addEventListener('click', function() {
 
 function hideAskContainer() {
     askDateContainer.classList.add('hide');
+};
+
+function showNumDaysContainer() {
+    numDaysContainer.classList.remove('hide');
 };
