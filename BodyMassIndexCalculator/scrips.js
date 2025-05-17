@@ -15,7 +15,6 @@ button.addEventListener('click', function() {
     bodyIndex.textContent = bodyMassIndex;
 
     calculateBmiValue();
-
     info.style.display = 'block';
 });
 
