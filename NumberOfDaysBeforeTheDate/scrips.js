@@ -5,9 +5,11 @@ const numDaysContainer = document.querySelector('#num-days-container');
 const numDays = document.querySelector('#num-days');
 const numHours = document.querySelector('#num-hours');
 const numMinutes = document.querySelector('#num-minutes');
+const numSeconds = document.querySelector('#num-seconds');
+const eventName = document.querySelector('#event-name');
 const button = document.querySelector('#button');
 
-// localStorage.clear();
+localStorage.clear();
 
 const jsonDate = localStorage.getItem('date');
 const dateArr = jsonDate ? JSON.parse(jsonDate) : [];
@@ -49,6 +51,7 @@ function calculateNumDays() {
         const enteredDateProp = JSON.parse(jsonDate);
         
         const enteredDateValue = enteredDateProp[0].date;
+        const enteredDateName = enteredDateProp[0].dateName;
 
         const enteredDateArr = enteredDateValue.split('.');
         
@@ -59,14 +62,17 @@ function calculateNumDays() {
         const enteredDate = new Date(enteredYear, enteredMonth -1, enteredDay);
 
         let diff = enteredDate.getTime() - now.getTime();
-        let numDaysBeforeDate = (diff / (1000 * 60 * 60 * 24)).toFixed(2);
-        let numHoursBeforeDate = Math.floor(diff / (1000 * 60 * 60));
-        let numSecondsBeforeDate = Math.floor(diff / (1000 * 60));
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor(diff / (1000 * 60 * 60) % 24);
+        const m = Math.floor(diff / (1000 * 60) % 60);
+        const s = Math.floor(diff / (1000) % 60);
 
-        numDays.textContent = `Кол-во дней до даты: 
-        дней: ${numDaysBeforeDate}`;
-        numHours.textContent = `Часов: ${numHoursBeforeDate}`;
-        numMinutes.textContent = `Минут: ${numSecondsBeforeDate}`;
+        eventName.textContent = `До ${enteredDateName} осталось:`
+
+        numDays.textContent = `${addZero(d)}`;
+        numHours.textContent = `${addZero(h)}`;
+        numMinutes.textContent = `${addZero(m)}`;
+        numSeconds.textContent = `${addZero(s)}`;
     }
     
 };
@@ -79,3 +85,11 @@ function hideAskContainer() {
 function showNumDaysContainer() {
     numDaysContainer.classList.remove('hide');
 };
+
+function addZero(num) {
+	if (num >= 0 && num <= 9) {
+		return '0' + num;
+	} else {
+		return num;
+	}
+}

@@ -15,6 +15,7 @@ html {
   align-items: center;
   justify-content: center;
   height: 50%;
+  background: #5cb8d7;
 }
 
 .ask-date-container {
@@ -23,6 +24,47 @@ html {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+.ask-date-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ask-date-container div input {
+  height: 30px;
+  width: 180px;
+  border: 1px #d2d0d0 solid;
+  border-radius: 5px;
+  box-shadow: 0 2px 11px -7px inset;
+  text-align: center;
+}
+
+.num-days-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.countdown_timer {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+.countdown_timer .timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background: #d80056;
+  margin: 10px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.countdown_timer .timer div {
+  font-size: 30px;
 }
 
 .hide {

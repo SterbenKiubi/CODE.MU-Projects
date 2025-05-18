@@ -12,20 +12,36 @@
         <div id="ask-date-container" class="ask-date-container">
             <h2>Кол-во дней до даты</h2>
             <div class="ask-date-container_enter-name">
-                <p>Введите название события:</p>
+                <h3>Введите название события:</h3>
                 <input id="date-name-input" type="text">
             </div>
             <div class="ask-date-container_enter-date">
-                <p>Введите дату:</p>
+                <h3>Введите дату:</h3>
                 <input id="date-input" type="text" placeholder="01.01.2000">
             </div>
             <input id="button" type="submit" value="Ввести">
         </div>
 
         <div id="num-days-container" class="num-days-container hide">
-            <div id="num-days"></div>
-            <div id="num-hours"></div>
-            <div id="num-minutes"></div>
+            <h1 id="event-name"></h1>
+            <div class="countdown_timer">
+                <div class="timer">
+                    <div id="num-days"></div>
+                    <h2>Дней</h2>
+                </div>
+                <div class="timer">
+                    <div id="num-hours"></div>
+                    <h2>Часов</h2>
+                </div>
+                <div class="timer">
+                    <div id="num-minutes"></div>
+                    <h2>Минут</h2>
+                </div>
+                <div class="timer">
+                    <div id="num-seconds"></div>
+                    <h2>Секунд</h2>
+                </div>
+            </div>
         </div>
 
     </div>
