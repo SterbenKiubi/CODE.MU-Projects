@@ -9,7 +9,7 @@ const numSeconds = document.querySelector('#num-seconds');
 const eventName = document.querySelector('#event-name');
 const button = document.querySelector('#button');
 
-localStorage.clear();
+// localStorage.clear();
 
 const jsonDate = localStorage.getItem('date');
 const dateArr = jsonDate ? JSON.parse(jsonDate) : [];
@@ -76,7 +76,6 @@ function calculateNumDays() {
     }
     
 };
-
 
 function hideAskContainer() {
     askDateContainer.classList.add('hide');
