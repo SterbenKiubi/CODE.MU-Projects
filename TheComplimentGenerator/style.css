@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gender {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.gender div {
+    display: flex;
+    flex-direction: column;
+}
