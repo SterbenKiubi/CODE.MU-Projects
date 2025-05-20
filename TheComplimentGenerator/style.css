@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +16,12 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 30px;
+}
+
+.container h1 {
+    font-family: "Caveat", cursive;
+    font-size: 56px;
 }
 
 .gender-container {
@@ -25,4 +33,27 @@ html {
 .gender-container div {
     display: flex;
     flex-direction: column;
+    font-family: "Caveat", cursive;
+    font-size: 36px;
+}
+
+#button {
+    padding: 10px;
+    font-family: "Caveat", cursive;
+    font-size: 36px;
+    border: none;
+    background: #d80056;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#button:hover {
+  color: white;
+  background: #b82f65;
+}
+
+.compliment {
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 26px;
 }
