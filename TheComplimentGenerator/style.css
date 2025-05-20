@@ -16,13 +16,13 @@ html {
   justify-content: center;
 }
 
-.gender {
+.gender-container {
     display: flex;
     justify-content: space-between;
     width: 50%;
 }
 
-.gender div {
+.gender-container div {
     display: flex;
     flex-direction: column;
 }
