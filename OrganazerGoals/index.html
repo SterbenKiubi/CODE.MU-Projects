@@ -8,26 +8,38 @@
 </head>
 <body>
     <div class="container">
+
         <div class="wrapper-goals">
+
             <h1>Цели:</h1>
+
             <div class="goal">
                 <p>Название цели:</p>
                 <input id="goal-name" type="text">
             </div>
+
             <div class="goal">
                 <p>Планируемая дата:</p>
-                <input id="goal-date" type="text">
+                <input id="goal-date" type="text" placeholder="01.01.2000">
             </div>
+
             <div class="goal">
                 <p>Список шагов цели:</p>
-                <div class="step">
-                    <p>1</p>
-                    <input class="step-name" type="text">
+
+                <div id="goal-steps" class="goal-steps">
+                    <div class="step">
+                        <p>1</p>
+                        <input class="step-name" type="text">
+                    </div>
                 </div>
-                <input type="submit" value="Добавить шаг">
+
+                <input id="button-add-step" type="submit" value="Добавить шаг">
             </div>
-            <input type="submit" value="Добавить цель">
+
+            <input id="button-add-goal" type="submit" value="Добавить цель">
         </div>
+        <div class="wrapper-entered-goals"></div>
+
     </div>
     <script src="scrips.js"></script>
 </body>
