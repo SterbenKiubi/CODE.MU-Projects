@@ -7,7 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="wrapper-goals">
+            <h1>Цели:</h1>
+            <div class="goal">
+                <p>Название цели:</p>
+                <input id="goal-name" type="text">
+            </div>
+            <div class="goal">
+                <p>Планируемая дата:</p>
+                <input id="goal-date" type="text">
+            </div>
+            <div class="goal">
+                <p>Список шагов цели:</p>
+                <div class="step">
+                    <p>1</p>
+                    <input class="step-name" type="text">
+                </div>
+                <input type="submit" value="Добавить шаг">
+            </div>
+            <input type="submit" value="Добавить цель">
+        </div>
+    </div>
     <script src="scrips.js"></script>
 </body>
 </html>
