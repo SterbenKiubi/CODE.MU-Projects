@@ -3,27 +3,57 @@ const inputGoalDate = document.querySelector('#goal-date');
 const goalSteps = document.querySelector('#goal-steps');
 const buttonAddStep = document.querySelector('#button-add-step');
 const buttonAddGoal = document.querySelector('#button-add-goal');
+const removeBtn = document.querySelector('#remove-btn');
+const enteredGoalsWrapper = document.querySelector('#wrapper-entered-goals');
+
+// localStorage.clear();
+
+const jsonGoals = localStorage.getItem('goals');
+const goalsArr = jsonGoals ? JSON.parse(jsonGoals) : [];
 
 let stepNum = 1;
 
 buttonAddGoal.addEventListener('click', function() {
     const goalName = inputGoalName.value;
-    inputGoalName.value = '';
-    
     const goalDate = inputGoalDate.value;
-    inputGoalDate.value = '';
 
-    
-    console.log(goalName);
-    console.log(goalDate);
-    
+    const obj = {
+        name: goalName,
+        date: goalDate,
+        steps: stepsNames(),
+    };
+
+    goalsArr.push(obj);
+
+    localStorage.setItem('goals', JSON.stringify(goalsArr));
+
+    inputGoalName.value = '';
+    inputGoalDate.value = '';
 });
 
 buttonAddStep.addEventListener('click', function() {
-    addStep();
+    addStep(goalSteps);
 });
 
-function addStep() {
+removeBtn.addEventListener('click', function() {
+    this.parentElement.remove();
+});
+
+const stepsNames = () => {
+    const stepsArr = [];
+
+    const steps = goalSteps.querySelectorAll('.step');
+    for(let elem of steps) {
+        const stepsInputs = elem.querySelectorAll('.step-name');
+        for(let input of stepsInputs) {
+            stepsArr.push(input.value)
+        }
+    }
+
+    return stepsArr;
+};
+
+function addStep(container) {
     stepNum = goalSteps.children.length + 1;
 
     const step = document.createElement('div');
@@ -35,8 +65,39 @@ function addStep() {
     const stepName = document.createElement('input');
     stepName.classList.add('step-name');
 
+    const remove = document.createElement('span');
+    remove.textContent = 'Удалить';
+    remove.classList.add('remove');
+    remove.addEventListener('click', function() {
+        this.parentElement.remove();
+    });
+
     step.appendChild(stepValue);
     step.appendChild(stepName);
+    step.appendChild(remove);
 
-    goalSteps.appendChild(step);
+    container.appendChild(step);
 };
+
+function renderGoals() {
+    console.log(goalsArr);
+    
+    if(goalsArr) {
+        for(let obj of goalsArr) {
+            const enteredGoalDiv = document.createElement('div');
+            enteredGoalDiv.classList.add('entered-goal');
+
+            const enteredGoalName = document.createElement('p');
+            enteredGoalName.textContent = obj.name;
+
+            const enteredGoalDate = document.createElement('p');
+            enteredGoalDate.textContent = obj.date;
+
+            enteredGoalDiv.appendChild(enteredGoalName);
+            enteredGoalDiv.appendChild(enteredGoalDate);
+
+            enteredGoalsWrapper.appendChild(enteredGoalDiv)
+        } 
+    }
+};
+renderGoals();

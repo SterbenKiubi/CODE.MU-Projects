@@ -31,3 +31,12 @@ html {
 .step {
     display: flex;
 }
+
+.remove {
+    color: blue;
+	cursor: pointer;
+}
+
+.wrapper-entered-goals {
+    display: flex;
+}
