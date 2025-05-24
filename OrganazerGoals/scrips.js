@@ -36,10 +36,6 @@ buttonAddStep.addEventListener('click', function() {
     addStep(goalSteps);
 });
 
-removeBtn.addEventListener('click', function() {
-    this.parentElement.remove();
-});
-
 const stepsNames = () => {
     const stepsArr = [];
 
@@ -65,17 +61,51 @@ function addStep(container) {
 
     const stepName = document.createElement('input');
     stepName.classList.add('step-name');
+    stepName.addEventListener('keypress', function(event) {
+        if(event.key == 'Enter') {
+        const text = this.value;
 
-    const remove = document.createElement('span');
-    remove.textContent = 'Удалить';
-    remove.classList.add('remove');
-    remove.addEventListener('click', function() {
-        this.parentElement.remove();
+        const span = document.createElement('span');
+        span.classList.add('step-name');
+        span.textContent = text;
+
+        span.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
+
+            const self = this;
+
+            const edit = document.createElement('input');
+            edit.value = text;
+            edit.addEventListener('keypress', function(event) {
+                if(event.key == 'Enter') {
+                    const newText = this.value;
+                    self.textContent = newText;
+
+                    this.remove();
+                }
+            });
+
+            self.appendChild(edit);
+            
+        });
+
+        const remove = document.createElement('span');
+        remove.textContent = 'Удалить';
+        remove.classList.add('remove');
+        remove.addEventListener('click', function() {
+            this.parentElement.remove();
+        });
+        
+        this.parentElement.appendChild(span);
+        this.parentElement.appendChild(remove);
+        this.remove();
+        }
+        
     });
 
     step.appendChild(stepValue);
     step.appendChild(stepName);
-    step.appendChild(remove);
 
     container.appendChild(step);
 };
