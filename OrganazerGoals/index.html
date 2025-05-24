@@ -11,36 +11,39 @@
 
         <div class="wrapper-goals">
 
-            <h1>Цели:</h1>
+            <h1>Добавить цель:</h1>
 
             <div class="goal">
-                <p>Название цели:</p>
-                <input id="goal-name" type="text">
+                <p>Название:</p>
+                <input id="goal-name" class="goal-input" type="text">
             </div>
 
             <div class="goal">
                 <p>Планируемая дата:</p>
-                <input id="goal-date" type="text" placeholder="01.01.2000">
+                <input id="goal-date" class="goal-input" type="text" placeholder="01.01.2000">
             </div>
 
             <div class="goal">
-                <p>Список шагов цели:</p>
+                <p>Список шагов для осуществления:</p>
 
                 <div id="goal-steps" class="goal-steps">
                     <div class="step">
-                        <p>1</p>
+                        <p>1.</p>
                         <input class="step-name" type="text">
                         <span id="remove-btn" class="remove">Удалить</span>
                     </div>
                 </div>
 
-                <input id="button-add-step" type="submit" value="Добавить шаг">
+                <input id="button-add-step" class="button-add-step" type="submit" value="Добавить шаг">
             </div>
 
             <input id="button-add-goal" type="submit" value="Добавить цель">
         </div>
 
-        <div id="wrapper-entered-goals" class="wrapper-entered-goals"></div>
+        <div id="wrapper-entered-goals" class="wrapper-entered-goals">
+            <h2>Цели:</h2>
+            <div id="entered-goals" class="entered-goals"></div>
+        </div>
 
     </div>
     <script src="scrips.js"></script>

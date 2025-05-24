@@ -5,6 +5,7 @@ const buttonAddStep = document.querySelector('#button-add-step');
 const buttonAddGoal = document.querySelector('#button-add-goal');
 const removeBtn = document.querySelector('#remove-btn');
 const enteredGoalsWrapper = document.querySelector('#wrapper-entered-goals');
+const enteredGoals = document.querySelector('#entered-goals');
 
 // localStorage.clear();
 
@@ -54,7 +55,7 @@ const stepsNames = () => {
 };
 
 function addStep(container) {
-    stepNum = goalSteps.children.length + 1;
+    stepNum = goalSteps.children.length + 1 + '.';
 
     const step = document.createElement('div');
     step.classList.add('step');
@@ -96,7 +97,15 @@ function renderGoals() {
             enteredGoalDiv.appendChild(enteredGoalName);
             enteredGoalDiv.appendChild(enteredGoalDate);
 
-            enteredGoalsWrapper.appendChild(enteredGoalDiv)
+            const enteredStepsArr = obj.steps;
+            for(let elem of enteredStepsArr) {
+                const enteredStep = document.createElement('p');
+                enteredStep.textContent = elem;
+
+                enteredGoalDiv.appendChild(enteredStep);
+            }
+
+            enteredGoals.appendChild(enteredGoalDiv);
         } 
     }
 };
