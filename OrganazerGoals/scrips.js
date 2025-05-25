@@ -107,9 +107,9 @@ const stepsNames = () => {
 
     const steps = goalSteps.querySelectorAll('.step');
     for(let elem of steps) {
-        const stepsInputs = elem.querySelectorAll('.step-name');
-        for(let input of stepsInputs) {
-            stepsArr.push(input.value)
+        const stepName = elem.querySelectorAll('.step-name');
+        for(let name of stepName) {
+            stepsArr.push(name.textContent)
         }
     }
 
@@ -127,8 +127,7 @@ function addStep(container) {
 
     const stepName = document.createElement('input');
     stepName.classList.add('step-name');
-    stepName.addEventListener('keypress', function(event) {
-        if(event.key == 'Enter') {
+    stepName.addEventListener('blur', function() {
         const text = this.value;
 
         const span = document.createElement('span');
@@ -144,7 +143,7 @@ function addStep(container) {
             const edit = document.createElement('input');
             edit.value = text;
             edit.addEventListener('keypress', function(event) {
-                if(event.key == 'Enter') {
+                if (event.key == 'Enter') {
                     const newText = this.value;
                     self.textContent = newText;
 
@@ -166,7 +165,6 @@ function addStep(container) {
         this.parentElement.appendChild(span);
         this.parentElement.appendChild(remove);
         this.remove();
-        }
         
     });
 
@@ -179,15 +177,17 @@ function addStep(container) {
 function renderGoals() {
     console.log(goalsArr);
     
-    if(goalsArr) {
+    if (goalsArr) {
         for(let obj of goalsArr) {
             const enteredGoalDiv = document.createElement('div');
             enteredGoalDiv.classList.add('entered-goal');
 
             const enteredGoalName = document.createElement('p');
+            enteredGoalName.classList.add('entered-goal-name')
             enteredGoalName.textContent = obj.name;
 
             const enteredGoalDate = document.createElement('p');
+            enteredGoalDate.classList.add('entered-goal-date')
             enteredGoalDate.textContent = obj.date;
 
             enteredGoalDiv.appendChild(enteredGoalName);
@@ -196,6 +196,7 @@ function renderGoals() {
             const enteredStepsArr = obj.steps;
             for(let elem of enteredStepsArr) {
                 const enteredStep = document.createElement('p');
+                enteredStep.classList.add('entered-step');
                 enteredStep.textContent = elem;
 
                 enteredGoalDiv.appendChild(enteredStep);
@@ -203,6 +204,33 @@ function renderGoals() {
 
             enteredGoals.appendChild(enteredGoalDiv);
         } 
+    }
+
+    const enteredGoalNames = document.querySelectorAll('.entered-goal-name');
+    for(let enteredGoalName of enteredGoalNames) {
+        const mark = document.createElement('span');
+        mark.classList.add('mark');
+        mark.textContent = 'Отметить';
+
+        enteredGoalName.appendChild(mark);
+    }
+
+    const enteredGoalDates = document.querySelectorAll('.entered-goal-date');
+    for(let enteredGoalDate of enteredGoalDates) {
+        const mark = document.createElement('span');
+        mark.classList.add('mark');
+        mark.textContent = 'Отметить';
+
+        enteredGoalDate.appendChild(mark);
+    }
+
+    const enteredGoalSteps = document.querySelectorAll('.entered-step');
+    for(let enteredGoalStep of enteredGoalSteps) {
+        const mark = document.createElement('span');
+        mark.classList.add('mark');
+        mark.textContent = 'Отметить';
+
+        enteredGoalStep.appendChild(mark);
     }
 };
 renderGoals();
