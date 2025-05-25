@@ -15,37 +15,70 @@ const goalsArr = jsonGoals ? JSON.parse(jsonGoals) : [];
 let stepNum = 1;
 
 inputGoalName.addEventListener('blur', function() {
-        const text = this.value;
+    const text = this.value;
+    
+    const p = document.createElement('p');
+    p.id = 'goal-name';
+    p.textContent = text;
+    p.addEventListener('dblclick', function() {
+        const text = this.textContent;
+        this.textContent = '';
+
+        const edit = document.createElement('input');
+        edit.id = 'goal-name';
+        edit.value = text;
         
-        const p = document.createElement('p');
-        p.id = 'goal-name';
-        p.textContent = text;
-        p.addEventListener('dblclick', function() {
-            const text = this.textContent;
-            this.textContent = '';
+        this.parentElement.appendChild(edit);
+        edit.focus();
 
-            const edit = document.createElement('input');
-            edit.id = 'goal-name';
-            edit.value = text;
-            
-            this.parentElement.appendChild(edit);
-            edit.focus();
+        const self = this;
 
-            const self = this;
+        edit.addEventListener('keypress', function(event) {
+            if (event.key == 'Enter') {
+                const newText = this.value;
+                self.textContent = newText;
 
-            edit.addEventListener('keypress', function(event) {
-                if (event.key == 'Enter') {
-                    const newText = this.value;
-                    self.textContent = newText;
-
-                    this.remove();
-                }
-            });
+                this.remove();
+            }
         });
-        
-        this.parentElement.appendChild(p);
-        this.remove();
     });
+    
+    this.parentElement.appendChild(p);
+    this.remove();
+});
+
+inputGoalDate.addEventListener('blur', function() {
+    const text = this.value;
+    
+    const p = document.createElement('p');
+    p.id = 'goal-name';
+    p.textContent = text;
+    p.addEventListener('dblclick', function() {
+        const text = this.textContent;
+        this.textContent = '';
+
+        const edit = document.createElement('input');
+        edit.id = 'goal-date';
+        edit.value = text;
+        
+        this.parentElement.appendChild(edit);
+        edit.focus();
+
+        const self = this;
+
+        edit.addEventListener('keypress', function(event) {
+            if (event.key == 'Enter') {
+                const newText = this.value;
+                self.textContent = newText;
+
+                this.remove();
+            }
+        });
+    });
+    
+    this.parentElement.appendChild(p);
+    this.remove();
+});
 
 buttonAddGoal.addEventListener('click', function() {
     const goalName = document.querySelector('#goal-name').textContent;
