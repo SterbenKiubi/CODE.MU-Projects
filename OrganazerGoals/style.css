@@ -140,3 +140,7 @@ h2 {
     font-family: "Caveat", cursive;
     font-size: 46px;
 }
+
+.done {
+    text-decoration: line-through;
+}

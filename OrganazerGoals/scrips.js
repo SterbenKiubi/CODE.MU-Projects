@@ -183,7 +183,7 @@ function renderGoals() {
             enteredGoalDiv.classList.add('entered-goal');
 
             const enteredGoalName = document.createElement('p');
-            enteredGoalName.classList.add('entered-goal-name')
+            enteredGoalName.classList.add('entered-goal-name');
             enteredGoalName.textContent = obj.name;
 
             const enteredGoalDate = document.createElement('p');
@@ -201,7 +201,7 @@ function renderGoals() {
 
                 enteredGoalDiv.appendChild(enteredStep);
             }
-
+            renderRemoveGoalBtn(enteredGoalDiv);
             enteredGoals.appendChild(enteredGoalDiv);
         } 
     }
@@ -210,16 +210,23 @@ function renderGoals() {
     for(let enteredGoalName of enteredGoalNames) {
         const mark = document.createElement('span');
         mark.classList.add('mark');
-        mark.textContent = 'Отметить';
+        mark.textContent = 'Отметить цель';
 
         enteredGoalName.appendChild(mark);
+        mark.addEventListener('click', function() {
+            const enteredGoalDiv = this.parentElement.parentElement;
+            const enteredGoalInfo = enteredGoalDiv.querySelectorAll('p');
+            for(let p of enteredGoalInfo) {
+                p.classList.toggle('done');
+            }
+        });
     }
 
     const enteredGoalDates = document.querySelectorAll('.entered-goal-date');
     for(let enteredGoalDate of enteredGoalDates) {
         const mark = document.createElement('span');
         mark.classList.add('mark');
-        mark.textContent = 'Отметить';
+        mark.textContent = 'Отметить дату';
 
         enteredGoalDate.appendChild(mark);
     }
@@ -228,9 +235,18 @@ function renderGoals() {
     for(let enteredGoalStep of enteredGoalSteps) {
         const mark = document.createElement('span');
         mark.classList.add('mark');
-        mark.textContent = 'Отметить';
+        mark.textContent = 'Отметить шаг';
 
         enteredGoalStep.appendChild(mark);
     }
 };
 renderGoals();
+
+function renderRemoveGoalBtn(container) {
+    const span = document.createElement('span');
+    span.textContent = 'Удалить цель';
+    span.classList.add('remove');
+    span.style.color = 'red';
+
+    container.appendChild(span);
+};
