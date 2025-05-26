@@ -96,6 +96,9 @@ buttonAddGoal.addEventListener('click', function() {
 
     inputGoalName.value = '';
     inputGoalDate.value = '';
+
+    renderGoals();
+    location.reload();
 });
 
 buttonAddStep.addEventListener('click', function() {
@@ -178,6 +181,7 @@ function renderGoals() {
     console.log(goalsArr);
     
     if (goalsArr) {
+        enteredGoals.innerHTML = '';
         for(let obj of goalsArr) {
             const enteredGoalDiv = document.createElement('div');
             enteredGoalDiv.classList.add('entered-goal');
@@ -209,16 +213,36 @@ function renderGoals() {
     const enteredGoalNames = document.querySelectorAll('.entered-goal-name');
     for(let enteredGoalName of enteredGoalNames) {
         addMarkButton(enteredGoalName, 'Отметить цель');
+        const mark = enteredGoalName.querySelector('.mark');
+
+        mark.addEventListener('click', function() {
+            const enteredGoalDiv = this.parentElement.parentElement;
+            const info = enteredGoalDiv.querySelectorAll('p');
+
+            for(let elem of info) {
+                elem.classList.toggle('done');
+            }
+        });
     }
 
     const enteredGoalDates = document.querySelectorAll('.entered-goal-date');
     for(let enteredGoalDate of enteredGoalDates) {
         addMarkButton(enteredGoalDate, 'Отметить дату');
+        const mark = enteredGoalDate.querySelector('.mark');
+
+        mark.addEventListener('click', function() {
+            this.parentElement.classList.toggle('done');
+        });
     }
 
     const enteredGoalSteps = document.querySelectorAll('.entered-step');
     for(let enteredGoalStep of enteredGoalSteps) {
         addMarkButton(enteredGoalStep, 'Отметить шаг');
+        const mark = enteredGoalStep.querySelector('.mark');
+
+        mark.addEventListener('click', function() {
+            this.parentElement.classList.toggle('done');
+        });
     }
 };
 renderGoals();
@@ -237,7 +261,6 @@ function addRemoveGoalBtn(element, text) {
     removeBtn.type = 'submit';
     removeBtn.value = text;
     removeBtn.classList.add('remove-goal-btn');
-    removeBtn.style.color = 'red';
 
     element.appendChild(removeBtn);
 
