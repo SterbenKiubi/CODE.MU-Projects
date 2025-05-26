@@ -144,3 +144,12 @@ h2 {
 .done {
     text-decoration: line-through;
 }
+
+.remove-goal-btn {
+    cursor: pointer;
+    width: 20%;
+    border: none;
+    background-color: white;
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+}

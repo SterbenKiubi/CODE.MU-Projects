@@ -233,10 +233,25 @@ function addMarkButton(element, text) {
 };
 
 function addRemoveGoalBtn(element, text) {
-    const span = document.createElement('span');
-    span.textContent = text;
-    span.classList.add('remove');
-    span.style.color = 'red';
+    const removeBtn = document.createElement('input');
+    removeBtn.type = 'submit';
+    removeBtn.value = text;
+    removeBtn.classList.add('remove-goal-btn');
+    removeBtn.style.color = 'red';
 
-    element.appendChild(span);
+    element.appendChild(removeBtn);
+
+    removeBtn.addEventListener('click', function() {
+        const enteredGoalsDiv = this.parentElement.parentElement;
+
+        const enteredGoals = enteredGoalsDiv.querySelectorAll('.entered-goal');
+        
+        const goalIndex = Array.from(enteredGoals).indexOf(this.parentElement);
+        
+        goalsArr.splice(goalIndex, 1);
+        
+        localStorage.setItem('goals', JSON.stringify(goalsArr));
+
+        this.parentElement.remove();
+    });
 };
