@@ -15,69 +15,88 @@ const goalsArr = jsonGoals ? JSON.parse(jsonGoals) : [];
 let stepNum = 1;
 
 inputGoalName.addEventListener('blur', function() {
-    const text = this.value;
-    
-    const p = document.createElement('p');
-    p.id = 'goal-name';
-    p.textContent = text;
-    p.addEventListener('dblclick', function() {
-        const text = this.textContent;
-        this.textContent = '';
-
-        const edit = document.createElement('input');
-        edit.id = 'goal-name';
-        edit.value = text;
+    if (validateGoalName(this)) {
+        const text = this.value;
         
-        this.parentElement.appendChild(edit);
-        edit.focus();
+        const p = document.createElement('p');
+        p.id = 'goal-name';
+        p.textContent = text;
+        p.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
 
-        const self = this;
+            const edit = document.createElement('input');
+            edit.id = 'goal-name';
+            edit.value = text;
+            
+            this.parentElement.appendChild(edit);
+            edit.focus();
 
-        edit.addEventListener('keypress', function(event) {
-            if (event.key == 'Enter') {
-                const newText = this.value;
-                self.textContent = newText;
+            const self = this;
 
-                this.remove();
-            }
+            edit.addEventListener('keypress', function(event) {
+                if (event.key == 'Enter') {
+                    if (validateGoalName(this)) {
+                        const newText = this.value;
+                        self.textContent = newText;
+
+                        this.remove();
+                    } else {
+                        alert('Введите название цели');
+                    }
+                }
+            });
         });
-    });
+        
+        this.parentElement.appendChild(p);
+        this.remove();
+    } else {
+        alert('Введите название цели');
+    }
     
-    this.parentElement.appendChild(p);
-    this.remove();
 });
 
 inputGoalDate.addEventListener('blur', function() {
-    const text = this.value;
-    
-    const p = document.createElement('p');
-    p.id = 'goal-name';
-    p.textContent = text;
-    p.addEventListener('dblclick', function() {
-        const text = this.textContent;
-        this.textContent = '';
-
-        const edit = document.createElement('input');
-        edit.id = 'goal-date';
-        edit.value = text;
+    if (validateGoalDate(this)) {
+        const text = this.value;
         
-        this.parentElement.appendChild(edit);
-        edit.focus();
+        const p = document.createElement('p');
+        p.id = 'goal-name';
+        p.textContent = text;
+        p.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
 
-        const self = this;
+            const edit = document.createElement('input');
+            edit.id = 'goal-date';
+            edit.value = text;
+            
+            this.parentElement.appendChild(edit);
+            edit.focus();
 
-        edit.addEventListener('keypress', function(event) {
-            if (event.key == 'Enter') {
-                const newText = this.value;
-                self.textContent = newText;
+            const self = this;
 
-                this.remove();
-            }
+            edit.addEventListener('keypress', function(event) {
+                if (event.key == 'Enter') {
+                    if (validateGoalDate(this)) {
+                        const newText = this.value;
+                        self.textContent = newText;
+
+                        this.remove();
+                    } else {
+                        alert('Введите планируемую дату в формате день.месяц.год');
+                    }
+                    
+                }
+            });
         });
-    });
+        
+        this.parentElement.appendChild(p);
+        this.remove();
+    } else {
+        
+    }
     
-    this.parentElement.appendChild(p);
-    this.remove();
 });
 
 buttonAddGoal.addEventListener('click', function() {
@@ -277,4 +296,19 @@ function addRemoveGoalBtn(element, text) {
 
         this.parentElement.remove();
     });
+};
+
+function validateGoalName(input) {
+    return input.value.trim() ? true : false;
+};
+
+function validateGoalDate(input) {
+    const regex = /\d{2}\.\d{2}\.\d{4}/g;
+    const str = input.value.replace(regex, '!');
+
+    if (str == '!') {
+        return true;
+    } else {
+        return false;
+    }
 };
