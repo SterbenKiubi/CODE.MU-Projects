@@ -4,6 +4,7 @@ const body = calendar.querySelector('.body');
 const yearAndMonth = document.querySelector('.year-and-month')
 const prev = calendar.querySelector('.prev');
 const next = calendar.querySelector('.next');
+const goals = document.querySelector('#goals');
 
 const date  = new Date();
 let year  = date.getFullYear();
@@ -148,6 +149,55 @@ function getPrevMonth(month) {
     }
 };
 
+function addZero(num) {
+	if (num >= 0 && num <= 9) {
+		return '0' + num;
+	} else {
+		return num;
+	}
+};
+
+function createGoalForm(div) {
+    const goalDiv = document.createElement('div');
+    goalDiv.classList.add('goal');
+
+    const goalName = document.createElement('p');
+    goalName.textContent = 'Название дела:';
+
+    const goalNameInput = document.createElement('input');
+    goalNameInput.id = 'goal-name';
+    goalNameInput.classList.add('goal-input');
+
+    const goalStartTime = document.createElement('p')
+    goalStartTime.textContent = 'Время начала:'
+
+    const goalStartTimeInput = document.createElement('input');
+    goalStartTimeInput.id = 'start-time';
+
+    const goalEndTime = document.createElement('p')
+    goalEndTime.textContent = 'Время Конца:'
+
+    const goalEndTimeInput = document.createElement('input');
+    goalEndTimeInput.id = 'end-time';
+
+    const addGoalButton = document.createElement('button');
+    addGoalButton.textContent = 'Добавить дело';
+
+    const createGoalButton = document.createElement('button');
+    createGoalButton.textContent = 'Создать новое дело';
+
+    goalDiv.appendChild(goalName);
+    goalDiv.appendChild(goalNameInput);
+    goalDiv.appendChild(goalStartTime);
+    goalDiv.appendChild(goalStartTimeInput);
+    goalDiv.appendChild(goalEndTime);
+    goalDiv.appendChild(goalEndTimeInput);
+    goalDiv.appendChild(addGoalButton);
+
+    div.appendChild(goalDiv);
+    div.appendChild(createGoalButton);
+};
+
 // EVENT-LISTENERS
 next.addEventListener('click', function() {
     draw(body, getNextYear(year, month), getNextMonth(month));
@@ -170,5 +220,16 @@ prev.addEventListener('click', function() {
         month = 11;
     } else {
         month--;
+    }
+});
+
+body.addEventListener('click', function(event) {
+    goals.innerHTML = '';
+    let td = event.target.closest('td');
+
+    if(td.textContent) {
+        const clickedDate = 
+        goals.textContent = `Список дел на ${addZero(td.textContent)}.${addZero(month)}.${year}:`;
+        createGoalForm(goals);
     }
 });
