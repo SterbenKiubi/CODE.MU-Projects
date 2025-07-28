@@ -5,6 +5,9 @@ const yearAndMonth = document.querySelector('.year-and-month')
 const prev = calendar.querySelector('.prev');
 const next = calendar.querySelector('.next');
 const goals = document.querySelector('#goals');
+const enteredGoalsList = document.querySelector('#entered-goals-list');
+const addGoal = document.querySelector('#add-goal');
+const clickedDateValue = document.querySelector('#clicked-date-value')
 
 const date  = new Date();
 let year  = date.getFullYear();
@@ -12,6 +15,9 @@ let month = date.getMonth();
 const currDay = date.getDate();
 const currMonth = date.getMonth();
 const currYear = date.getFullYear();
+
+const jsonGoals = localStorage.getItem('goals');
+const goalsArr = jsonGoals ? JSON.parse(jsonGoals) : [];
 
 const months = [
     'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
@@ -59,6 +65,82 @@ function createTable(parent, arr, year, month) {
 
     return cells;
 }
+
+function createGoalForm(div) {
+    const goalDiv = document.createElement('div');
+    goalDiv.classList.add('goal');
+
+    const GoalTitle = document.createElement('h3');
+    GoalTitle.textContent = 'Добавить дело:'
+
+    const goalName = document.createElement('p');
+    goalName.textContent = 'Название дела:';
+
+    const goalNameInput = document.createElement('input');
+    goalNameInput.id = 'goal-name';
+    goalNameInput.classList.add('goal-input');
+
+    const goalStartTime = document.createElement('p')
+    goalStartTime.textContent = 'Время начала:'
+
+    const goalStartTimeInput = document.createElement('input');
+    goalStartTimeInput.id = 'start-time';
+
+    const goalEndTime = document.createElement('p')
+    goalEndTime.textContent = 'Время Конца:'
+
+    const goalEndTimeInput = document.createElement('input');
+    goalEndTimeInput.id = 'end-time';
+
+    const addGoalButton = document.createElement('button');
+    addGoalButton.textContent = 'Добавить дело';
+    addGoalButton.addEventListener('click', function() {
+        const goalNameValue = goalNameInput.value;
+        const goalStartTimeValue = goalStartTimeInput.value;
+        const goalEndTimeValue = goalEndTimeInput.value;
+
+        goalNameInput.value = '';
+        goalStartTimeInput.value = '';
+        goalEndTimeInput.value = '';
+
+        const enteredGoalNameLi = document.createElement('li');
+        enteredGoalNameLi.textContent = `${goalNameValue} : ${goalStartTimeValue} - ${goalEndTimeValue}`;
+        enteredGoalNameLi.style.display = 'flex';
+        enteredGoalNameLi.style.gap = '10px'
+
+        createRemoveGoalBtn(enteredGoalNameLi);
+
+        enteredGoalsList.appendChild(enteredGoalNameLi);
+    });
+
+    const createGoalButton = document.createElement('button');
+    createGoalButton.textContent = 'Создать новое дело';
+
+    goalDiv.appendChild(GoalTitle);
+    goalDiv.appendChild(goalName);
+    goalDiv.appendChild(goalNameInput);
+    goalDiv.appendChild(goalStartTime);
+    goalDiv.appendChild(goalStartTimeInput);
+    goalDiv.appendChild(goalEndTime);
+    goalDiv.appendChild(goalEndTimeInput);
+    goalDiv.appendChild(addGoalButton);
+
+    div.appendChild(goalDiv);
+    div.appendChild(createGoalButton);
+};
+
+function createRemoveGoalBtn(parent) {
+    const remove = document.createElement('span');
+    remove.textContent = 'Удалить';
+    remove.style.cursor = 'pointer';
+    remove.style.color = 'red';
+
+    remove.addEventListener('click', function() {
+        this.parentElement.remove();
+    });
+
+    parent.appendChild(remove);
+};
 
 function range(count) {
     const arr = [];
@@ -157,47 +239,6 @@ function addZero(num) {
 	}
 };
 
-function createGoalForm(div) {
-    const goalDiv = document.createElement('div');
-    goalDiv.classList.add('goal');
-
-    const goalName = document.createElement('p');
-    goalName.textContent = 'Название дела:';
-
-    const goalNameInput = document.createElement('input');
-    goalNameInput.id = 'goal-name';
-    goalNameInput.classList.add('goal-input');
-
-    const goalStartTime = document.createElement('p')
-    goalStartTime.textContent = 'Время начала:'
-
-    const goalStartTimeInput = document.createElement('input');
-    goalStartTimeInput.id = 'start-time';
-
-    const goalEndTime = document.createElement('p')
-    goalEndTime.textContent = 'Время Конца:'
-
-    const goalEndTimeInput = document.createElement('input');
-    goalEndTimeInput.id = 'end-time';
-
-    const addGoalButton = document.createElement('button');
-    addGoalButton.textContent = 'Добавить дело';
-
-    const createGoalButton = document.createElement('button');
-    createGoalButton.textContent = 'Создать новое дело';
-
-    goalDiv.appendChild(goalName);
-    goalDiv.appendChild(goalNameInput);
-    goalDiv.appendChild(goalStartTime);
-    goalDiv.appendChild(goalStartTimeInput);
-    goalDiv.appendChild(goalEndTime);
-    goalDiv.appendChild(goalEndTimeInput);
-    goalDiv.appendChild(addGoalButton);
-
-    div.appendChild(goalDiv);
-    div.appendChild(createGoalButton);
-};
-
 // EVENT-LISTENERS
 next.addEventListener('click', function() {
     draw(body, getNextYear(year, month), getNextMonth(month));
@@ -224,12 +265,11 @@ prev.addEventListener('click', function() {
 });
 
 body.addEventListener('click', function(event) {
-    goals.innerHTML = '';
+    addGoal.innerHTML = '';
     let td = event.target.closest('td');
 
     if(td.textContent) {
-        const clickedDate = 
-        goals.textContent = `Список дел на ${addZero(td.textContent)}.${addZero(month)}.${year}:`;
-        createGoalForm(goals);
+        clickedDateValue.textContent = `Список дел на ${addZero(td.textContent)}.${addZero(month)}.${year}:`;
+        createGoalForm(addGoal);
     }
 });
