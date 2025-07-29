@@ -19,7 +19,7 @@ h1 {
     cursor: pointer;
 }
 #calendar .nav, #calendar .info {
-text-align: center;
+    text-align: center;
 }
 #calendar a {
     color: blue;
@@ -35,4 +35,11 @@ text-align: center;
 .goals {
     display: flex;
     flex-direction: column;
+}
+.remove {
+    color: blue;
+	cursor: pointer;
+    font-family: "Caveat", cursive;
+    display: flex;
+    align-items: center;
 }
