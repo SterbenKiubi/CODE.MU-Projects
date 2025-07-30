@@ -309,6 +309,12 @@ body.addEventListener('click', function(event) {
 
         for (let obj of goalsArr) {
             if(obj.date == clickedDate) {
+                const editedObj = {
+                    date: obj.date,
+                    name: obj.name,
+                    start: obj.start,
+                    end: obj.end
+                };
                 const li = document.createElement('li');
 
                 const infoGoalName = document.createElement('p');
@@ -329,12 +335,7 @@ body.addEventListener('click', function(event) {
                             const newText = this.value;
                             self.textContent = newText;
 
-                            const editedObj = {
-                                date: obj.date,
-                                name: newText,
-                                start: obj.start,
-                                end: obj.end
-                            };
+                            editedObj.name = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
@@ -364,12 +365,7 @@ body.addEventListener('click', function(event) {
                             const newText = this.value;
                             self.textContent = newText;
 
-                            const editedObj = {
-                                date: obj.date,
-                                name: obj.name,
-                                start: newText,
-                                end: obj.end
-                            };
+                            editedObj.start = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
@@ -399,12 +395,7 @@ body.addEventListener('click', function(event) {
                             const newText = this.value;
                             self.textContent = newText;
 
-                            const editedObj = {
-                                date: obj.date,
-                                name: obj.name,
-                                start: obj.start,
-                                end: newText
-                            };
+                            editedObj.end = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
