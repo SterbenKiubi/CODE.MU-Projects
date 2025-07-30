@@ -120,18 +120,90 @@ function createGoalForm(div) {
 
         const enteredGoalName = document.createElement('span');
         enteredGoalName.textContent = `${goalNameValue}`;
+        enteredGoalName.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
+
+            const self = this;
+
+            const edit = document.createElement('input');
+            edit.value = text;
+            edit.addEventListener('keypress', function(event) {
+                if (event.key == 'Enter') {
+                    const newText = this.value;
+                    self.textContent = newText;
+
+                    enteredGoalObj.name = newText;
+                    goalsArr.splice(goalsArr.indexOf(enteredGoalObj), 1, enteredGoalObj)
+                    localStorage.setItem('goals', JSON.stringify(goalsArr));
+
+                    this.remove();
+                }
+            });
+
+            self.appendChild(edit);
+            
+        });
 
         const enteredGoalStartTimeInfo = document.createElement('p');
         enteredGoalStartTimeInfo.textContent = 'Время начала: ';
 
         const enteredGoalStartTime = document.createElement('span');
         enteredGoalStartTime.textContent = `${goalStartTimeValue}`;
+        enteredGoalStartTime.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
+
+            const self = this;
+
+            const edit = document.createElement('input');
+            edit.value = text;
+            edit.addEventListener('keypress', function(event) {
+                if (event.key == 'Enter') {
+                    const newText = this.value;
+                    self.textContent = newText;
+
+                    enteredGoalObj.start = newText;
+                    goalsArr.splice(goalsArr.indexOf(enteredGoalObj), 1, enteredGoalObj)
+                    localStorage.setItem('goals', JSON.stringify(goalsArr));
+
+                    this.remove();
+                }
+            });
+
+            self.appendChild(edit);
+            
+        });
 
         const enteredGoalEndTimeInfo = document.createElement('span');
         enteredGoalEndTimeInfo.textContent = 'Время конца: ';
 
         const enteredGoalEndTime = document.createElement('span');
         enteredGoalEndTime.textContent = `${goalEndTimeValue}`;
+        enteredGoalEndTime.addEventListener('dblclick', function() {
+            const text = this.textContent;
+            this.textContent = '';
+
+            const self = this;
+
+            const edit = document.createElement('input');
+            edit.value = text;
+            edit.addEventListener('keypress', function(event) {
+                if (event.key == 'Enter') {
+                    const newText = this.value;
+                    self.textContent = newText;
+
+                    enteredGoalObj.end = newText;
+                    goalsArr.splice(goalsArr.indexOf(enteredGoalObj), 1, enteredGoalObj)
+                    localStorage.setItem('goals', JSON.stringify(goalsArr));
+
+                    this.remove();
+                }
+            });
+
+            self.appendChild(edit);
+            
+        });
 
         const remove = document.createElement('span');
         remove.textContent = 'Удалить';
