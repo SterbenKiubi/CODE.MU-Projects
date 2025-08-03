@@ -83,25 +83,52 @@ function createGoalForm(div) {
     const goalNameInput = document.createElement('input');
     goalNameInput.id = 'goal-name';
     goalNameInput.classList.add('goal-input');
+    goalNameInput.placeholder = 'Название';
 
     const goalStartTime = document.createElement('p')
     goalStartTime.textContent = 'Время начала:'
 
     const goalStartTimeInput = document.createElement('input');
     goalStartTimeInput.id = 'start-time';
+    goalStartTimeInput.placeholder = '08:00';
 
     const goalEndTime = document.createElement('p')
     goalEndTime.textContent = 'Время Конца:'
 
     const goalEndTimeInput = document.createElement('input');
     goalEndTimeInput.id = 'end-time';
+    goalEndTimeInput.placeholder = '20:00';
 
     const addGoalButton = document.createElement('button');
     addGoalButton.textContent = 'Добавить дело';
     addGoalButton.addEventListener('click', function() {
-        const goalNameValue = goalNameInput.value;
-        const goalStartTimeValue = goalStartTimeInput.value;
-        const goalEndTimeValue = goalEndTimeInput.value;
+        let goalNameValue;
+        let goalStartTimeValue;
+        let goalEndTimeValue;
+
+        if(validateGoalName(goalNameInput)) {
+            goalNameValue = goalNameInput.value;
+        } else {
+            alert('Введите название дела');
+            goalNameInput.focus();
+            return;
+        }
+
+        if(validateGoalTime(goalStartTimeInput)) {
+            goalStartTimeValue = goalStartTimeInput.value;
+        } else {
+            alert('Введите время начала в формате 08:00');
+            goalStartTimeInput.focus();
+            return;
+        }
+
+        if(validateGoalTime(goalEndTimeInput)) {
+            goalEndTimeValue = goalEndTimeInput.value;
+        } else {
+            alert('Введите время конца в формате 20:00');
+            goalEndTimeInput.focus();
+            return;
+        }
 
         const enteredGoalObj = {
             date: clickedDate,
@@ -343,6 +370,21 @@ function addZero(num) {
 	}
 };
 
+function validateGoalName(input) {
+    return input.value.trim() ? true : false;
+};
+
+function validateGoalTime(input) {
+    const regex = /\d{2}\:\d{2}/g;
+    const str = input.value.replace(regex, '!');
+
+    if (str == '!') {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 // EVENT-LISTENERS
 next.addEventListener('click', function() {
     draw(body, getNextYear(year, month), getNextMonth(month));
@@ -405,7 +447,14 @@ body.addEventListener('click', function(event) {
                     edit.addEventListener('keypress', function(event) {
                         if (event.key == 'Enter') {
                             const newText = this.value;
-                            self.textContent = newText;
+
+                            if(validateGoalName(this)) {
+                                self.textContent = newText;
+                            } else {
+                                alert('Введите новое название дела');
+                                edit.focus();
+                                return;
+                            }
 
                             editedObj.name = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
@@ -435,7 +484,14 @@ body.addEventListener('click', function(event) {
                     edit.addEventListener('keypress', function(event) {
                         if (event.key == 'Enter') {
                             const newText = this.value;
-                            self.textContent = newText;
+
+                            if(validateGoalTime(this)) {
+                                self.textContent = newText;
+                            } else {
+                                alert('Введите новое время начала в формате 08:00');
+                                edit.focus();
+                                return;
+                            }
 
                             editedObj.start = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
@@ -465,7 +521,14 @@ body.addEventListener('click', function(event) {
                     edit.addEventListener('keypress', function(event) {
                         if (event.key == 'Enter') {
                             const newText = this.value;
-                            self.textContent = newText;
+
+                            if(validateGoalTime(this)) {
+                                self.textContent = newText;
+                            } else {
+                                alert('Введите новое время конца в формате 20:00');
+                                edit.focus();
+                                return;
+                            }
 
                             editedObj.end = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
