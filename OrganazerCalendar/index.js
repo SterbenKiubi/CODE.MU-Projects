@@ -108,24 +108,27 @@ function createGoalForm(div) {
 
         if(validateGoalName(goalNameInput)) {
             goalNameValue = goalNameInput.value;
+            goalNameInput.classList.remove('border-red');
         } else {
-            alert('Введите название дела');
+            goalNameInput.classList.add('border-red');
             goalNameInput.focus();
             return;
         }
 
         if(validateGoalTime(goalStartTimeInput)) {
             goalStartTimeValue = goalStartTimeInput.value;
+            goalStartTimeInput.classList.remove('border-red');
         } else {
-            alert('Введите время начала в формате 08:00');
+            goalStartTimeInput.classList.add('border-red');
             goalStartTimeInput.focus();
             return;
         }
 
         if(validateGoalTime(goalEndTimeInput)) {
             goalEndTimeValue = goalEndTimeInput.value;
+            goalEndTimeInput.classList.remove('border-red');
         } else {
-            alert('Введите время конца в формате 20:00');
+            goalEndTimeInput.classList.add('border-red');
             goalEndTimeInput.focus();
             return;
         }
