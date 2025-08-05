@@ -461,13 +461,7 @@ body.addEventListener('click', function(event) {
                             this.classList.remove('border-red');
                             const newText = this.value;
 
-                            if(validateGoalName(this)) {
-                                self.textContent = newText;
-                            } else {
-                                alert('Введите новое название дела');
-                                edit.focus();
-                                return;
-                            }
+                            self.textContent = newText;
 
                             editedObj.name = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
@@ -476,6 +470,8 @@ body.addEventListener('click', function(event) {
                             this.remove();
                         } else {
                             this.classList.add('border-red');
+                            edit.focus();
+                            return;
                         }
                     });
 
@@ -501,13 +497,7 @@ body.addEventListener('click', function(event) {
                             this.classList.remove('border-red');
                             const newText = this.value;
 
-                            if(validateGoalTime(this)) {
-                                self.textContent = newText;
-                            } else {
-                                alert('Введите новое время начала в формате 08:00');
-                                edit.focus();
-                                return;
-                            }
+                            self.textContent = newText;
 
                             editedObj.start = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
@@ -516,6 +506,8 @@ body.addEventListener('click', function(event) {
                             this.remove();
                         } else {
                             this.classList.add('border-red');
+                            edit.focus();
+                            return;
                         }
                     });
 
@@ -541,13 +533,7 @@ body.addEventListener('click', function(event) {
                             this.classList.remove('border-red');
                             const newText = this.value;
 
-                            if(validateGoalTime(this)) {
-                                self.textContent = newText;
-                            } else {
-                                alert('Введите новое время конца в формате 20:00');
-                                edit.focus();
-                                return;
-                            }
+                            self.textContent = newText;
 
                             editedObj.end = newText;
                             goalsArr.splice(goalsArr.indexOf(obj), 1, editedObj)
@@ -556,6 +542,8 @@ body.addEventListener('click', function(event) {
                             this.remove();
                         } else {
                             this.classList.add('border-red');
+                            edit.focus();
+                            return;
                         }
                     });
 
