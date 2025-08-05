@@ -159,7 +159,8 @@ function createGoalForm(div) {
             const edit = document.createElement('input');
             edit.value = text;
             edit.addEventListener('keypress', function(event) {
-                if (event.key == 'Enter') {
+                if (event.key == 'Enter' && this.value) {
+                    this.classList.remove('border-red');
                     const newText = this.value;
                     self.textContent = newText;
 
@@ -168,6 +169,8 @@ function createGoalForm(div) {
                     localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                     this.remove();
+                } else {
+                    this.classList.add('border-red');
                 }
             });
 
@@ -189,7 +192,8 @@ function createGoalForm(div) {
             const edit = document.createElement('input');
             edit.value = text;
             edit.addEventListener('keypress', function(event) {
-                if (event.key == 'Enter') {
+                if (event.key == 'Enter' && validateGoalTime(this)) {
+                    this.classList.remove('border-red');
                     const newText = this.value;
                     self.textContent = newText;
 
@@ -198,6 +202,8 @@ function createGoalForm(div) {
                     localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                     this.remove();
+                } else {
+                    this.classList.add('border-red');
                 }
             });
 
@@ -219,7 +225,8 @@ function createGoalForm(div) {
             const edit = document.createElement('input');
             edit.value = text;
             edit.addEventListener('keypress', function(event) {
-                if (event.key == 'Enter') {
+                if (event.key == 'Enter' && validateGoalTime(this)) {
+                    this.classList.remove('border-red');
                     const newText = this.value;
                     self.textContent = newText;
 
@@ -228,7 +235,9 @@ function createGoalForm(div) {
                     localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                     this.remove();
-                }
+                } else {
+                    this.classList.add('border-red');
+                }     
             });
 
             self.appendChild(edit);
@@ -378,7 +387,7 @@ function validateGoalName(input) {
 };
 
 function validateGoalTime(input) {
-    const regex = /\d{2}\:\d{2}/g;
+    const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     const str = input.value.replace(regex, '!');
 
     if (str == '!') {
@@ -448,7 +457,8 @@ body.addEventListener('click', function(event) {
                     const edit = document.createElement('input');
                     edit.value = text;
                     edit.addEventListener('keypress', function(event) {
-                        if (event.key == 'Enter') {
+                        if (event.key == 'Enter' && validateGoalName(this)) {
+                            this.classList.remove('border-red');
                             const newText = this.value;
 
                             if(validateGoalName(this)) {
@@ -464,6 +474,8 @@ body.addEventListener('click', function(event) {
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                             this.remove();
+                        } else {
+                            this.classList.add('border-red');
                         }
                     });
 
@@ -485,7 +497,8 @@ body.addEventListener('click', function(event) {
                     const edit = document.createElement('input');
                     edit.value = text;
                     edit.addEventListener('keypress', function(event) {
-                        if (event.key == 'Enter') {
+                        if (event.key == 'Enter' && validateGoalTime(this)) {
+                            this.classList.remove('border-red');
                             const newText = this.value;
 
                             if(validateGoalTime(this)) {
@@ -501,6 +514,8 @@ body.addEventListener('click', function(event) {
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                             this.remove();
+                        } else {
+                            this.classList.add('border-red');
                         }
                     });
 
@@ -522,7 +537,8 @@ body.addEventListener('click', function(event) {
                     const edit = document.createElement('input');
                     edit.value = text;
                     edit.addEventListener('keypress', function(event) {
-                        if (event.key == 'Enter') {
+                        if (event.key == 'Enter' && validateGoalTime(this)) {
+                            this.classList.remove('border-red');
                             const newText = this.value;
 
                             if(validateGoalTime(this)) {
@@ -538,6 +554,8 @@ body.addEventListener('click', function(event) {
                             localStorage.setItem('goals', JSON.stringify(goalsArr));
 
                             this.remove();
+                        } else {
+                            this.classList.add('border-red');
                         }
                     });
 
