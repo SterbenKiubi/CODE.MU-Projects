@@ -57,7 +57,7 @@ function createTable(parent, arr, year, month) {
             const td = document.createElement('td');
             td.textContent = num;
 
-            if(num === currDay && year === currYear && month === currMonth) {
+            if (num === currDay && year === currYear && month === currMonth) {
                 td.style.background = 'green';
             }
 
@@ -106,7 +106,7 @@ function createGoalForm(div) {
         let goalStartTimeValue;
         let goalEndTimeValue;
 
-        if(validateGoalName(goalNameInput)) {
+        if (validateGoalName(goalNameInput)) {
             goalNameValue = goalNameInput.value;
             goalNameInput.classList.remove('border-red');
         } else {
@@ -115,7 +115,7 @@ function createGoalForm(div) {
             return;
         }
 
-        if(validateGoalTime(goalStartTimeInput)) {
+        if (validateGoalTime(goalStartTimeInput)) {
             goalStartTimeValue = goalStartTimeInput.value;
             goalStartTimeInput.classList.remove('border-red');
         } else {
@@ -313,7 +313,7 @@ function getLastWeekDay(year, month) {
 	const date = new Date(year, month + 1, 0);
     const num  = date.getDay();
 	
-	if(num == 0) {
+	if (num == 0) {
 		return 6;
 	} else {
 		return num - 1;
@@ -352,7 +352,7 @@ function getNextYear(year, month) {
 };
 
 function getNextMonth(month) {
-    if(month == 11) {
+    if (month == 11) {
         return 0;
     } else {
         return month + 1;
@@ -360,14 +360,14 @@ function getNextMonth(month) {
 };
 
 function getPrevYear(year, month) {
-    if(month == 0) {
+    if (month == 0) {
         return year  - 1;
     }
     return year;
 };
 
 function getPrevMonth(month) {
-    if(month == 0) {
+    if (month == 0) {
         return 11;
     } else {
         return month - 1;
@@ -402,7 +402,7 @@ next.addEventListener('click', function() {
     draw(body, getNextYear(year, month), getNextMonth(month));
     yearAndMonth.textContent = `${months[getNextMonth(month)]} ${getNextYear(year, month)}`;
     
-    if(month == 11) {
+    if (month == 11) {
         year++;
         month = 0;
     } else {
@@ -414,7 +414,7 @@ prev.addEventListener('click', function() {
     draw(body, getPrevYear(year, month), getPrevMonth(month));
     yearAndMonth.textContent = `${months[getPrevMonth(month)]} ${getPrevYear(year, month)}`;
     
-    if(month == 0) {
+    if (month == 0) {
         year--;
         month = 11;
     } else {
@@ -426,7 +426,7 @@ body.addEventListener('click', function(event) {
     addGoal.innerHTML = '';
     let td = event.target.closest('td');
 
-    if(td.textContent) {
+    if (td.textContent) {
         clickedDate = `${addZero(td.textContent)}.${addZero(month + 1)}.${year}`;
         clickedDateValue.textContent = `Список дел на ${clickedDate}:`;
         createGoalForm(addGoal);
@@ -434,7 +434,7 @@ body.addEventListener('click', function(event) {
         enteredGoalsList.innerHTML = '';
 
         for (let obj of goalsArr) {
-            if(obj.date == clickedDate) {
+            if (obj.date == clickedDate) {
                 const editedObj = {
                     date: obj.date,
                     name: obj.name,
