@@ -72,3 +72,22 @@ h1 {
     font-size: 30px;
     color: white;
 }
+.goal-input {
+    background-color: antiquewhite;
+    height: 30px;
+    border-radius: 7px;
+    padding-left: 10px;
+}
+.goal-button {
+    color: white;
+    margin-top: 20px;
+    width: 80%;
+    height: 40px;
+    background-color: #b82f65;
+    border-radius: 7px;
+    border: none;
+}
+.goal-button:hover {
+    cursor: pointer;
+    background-color: #833252;
+}

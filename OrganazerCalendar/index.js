@@ -90,6 +90,7 @@ function createGoalForm(div) {
 
     const goalStartTimeInput = document.createElement('input');
     goalStartTimeInput.id = 'start-time';
+    goalStartTimeInput.classList.add('goal-input');
     goalStartTimeInput.placeholder = '08:00';
 
     const goalEndTime = document.createElement('p')
@@ -97,9 +98,11 @@ function createGoalForm(div) {
 
     const goalEndTimeInput = document.createElement('input');
     goalEndTimeInput.id = 'end-time';
+    goalEndTimeInput.classList.add('goal-input');
     goalEndTimeInput.placeholder = '20:00';
 
     const addGoalButton = document.createElement('button');
+    addGoalButton.classList.add('goal-button');
     addGoalButton.textContent = 'Добавить дело';
     addGoalButton.addEventListener('click', function() {
         let goalNameValue;
